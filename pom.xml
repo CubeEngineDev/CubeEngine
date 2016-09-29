@@ -14,14 +14,14 @@
 
   <properties>
     <projectBase>${project.basedir}</projectBase>
-    <minecraftVersion>1.8.8</minecraftVersion>
+    <minecraftVersion>1.10.2</minecraftVersion>
     <bukkitVersion>${minecraftVersion}-R0.1-SNAPSHOT</bukkitVersion>
   </properties>
 
   <repositories>
       <repository>
           <id>cubeisland-repo</id>
-          <url>http://maven.cubeisland.de/content/groups/public/</url>
+          <url>http://repo.cubeengine.org/</url>
           <releases>
               <enabled>true</enabled>
           </releases>

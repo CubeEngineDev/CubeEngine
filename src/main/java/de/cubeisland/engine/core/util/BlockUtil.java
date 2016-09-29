@@ -29,7 +29,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.material.Attachable;
 import org.bukkit.material.MaterialData;
 
-import static net.minecraft.server.v1_8_R3.Block.REGISTRY;
+import static net.minecraft.server.v1_10_R1.Block.REGISTRY;
 import static org.bukkit.Material.*;
 
 /**
@@ -52,9 +52,9 @@ public class BlockUtil
             BlockFace.NORTH, BlockFace.WEST, BlockFace.EAST, BlockFace.SOUTH
         };
 
-    private static net.minecraft.server.v1_8_R3.Block getBlockForId(int id)
+    private static net.minecraft.server.v1_10_R1.Block getBlockForId(int id)
     {
-        return (net.minecraft.server.v1_8_R3.Block)REGISTRY.a(id);
+        return REGISTRY.getId(id);
     }
 
     /**
@@ -221,7 +221,8 @@ public class BlockUtil
 
     public static boolean isPowerSource(Material type)
     {
-        return getBlockForId(type.getId()).isPowerSource();
+        net.minecraft.server.v1_10_R1.Block block = getBlockForId(type.getId());
+        return block.isPowerSource(block.getBlockData());
     }
 
     /**
@@ -255,9 +256,9 @@ public class BlockUtil
 
     private static boolean isHingeBlock(Material material)
     {
-        net.minecraft.server.v1_8_R3.Block block = getBlockForId(material.getId());
+        net.minecraft.server.v1_10_R1.Block block = getBlockForId(material.getId());
         // called in ItemDoor.place(...)
-        return block.isOccluding(); // return (this.material.k()) && (d()) && (!isPowerSource());
+        return block.isOccluding(block.getBlockData()); // return (this.material.k()) && (d()) && (!isPowerSource());
     }
 
     public static Block getHighestBlockAt(Location loc)

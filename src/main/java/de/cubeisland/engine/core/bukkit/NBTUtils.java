@@ -31,23 +31,23 @@ import de.cubeisland.engine.converter.node.Node;
 import de.cubeisland.engine.converter.node.NullNode;
 import de.cubeisland.engine.converter.node.ShortNode;
 import de.cubeisland.engine.converter.node.StringNode;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.NBTBase;
-import net.minecraft.server.v1_8_R3.NBTTagByte;
-import net.minecraft.server.v1_8_R3.NBTTagByteArray;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTTagDouble;
-import net.minecraft.server.v1_8_R3.NBTTagEnd;
-import net.minecraft.server.v1_8_R3.NBTTagFloat;
-import net.minecraft.server.v1_8_R3.NBTTagInt;
-import net.minecraft.server.v1_8_R3.NBTTagIntArray;
-import net.minecraft.server.v1_8_R3.NBTTagList;
-import net.minecraft.server.v1_8_R3.NBTTagLong;
-import net.minecraft.server.v1_8_R3.NBTTagShort;
-import net.minecraft.server.v1_8_R3.NBTTagString;
-import net.minecraft.server.v1_8_R3.TileEntity;
+import net.minecraft.server.v1_10_R1.BlockPosition;
+import net.minecraft.server.v1_10_R1.NBTBase;
+import net.minecraft.server.v1_10_R1.NBTTagByte;
+import net.minecraft.server.v1_10_R1.NBTTagByteArray;
+import net.minecraft.server.v1_10_R1.NBTTagCompound;
+import net.minecraft.server.v1_10_R1.NBTTagDouble;
+import net.minecraft.server.v1_10_R1.NBTTagEnd;
+import net.minecraft.server.v1_10_R1.NBTTagFloat;
+import net.minecraft.server.v1_10_R1.NBTTagInt;
+import net.minecraft.server.v1_10_R1.NBTTagIntArray;
+import net.minecraft.server.v1_10_R1.NBTTagList;
+import net.minecraft.server.v1_10_R1.NBTTagLong;
+import net.minecraft.server.v1_10_R1.NBTTagShort;
+import net.minecraft.server.v1_10_R1.NBTTagString;
+import net.minecraft.server.v1_10_R1.TileEntity;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
 
 public class NBTUtils
 {
@@ -57,7 +57,7 @@ public class NBTUtils
         TileEntity tileEntity = ((CraftWorld)location.getWorld()).getHandle()
              .getTileEntity(new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
         if (tileEntity == null) return null;
-        tileEntity.b(result);
+        tileEntity.save(result);
         return result;
     }
 
@@ -78,27 +78,27 @@ public class NBTUtils
         }
         if (nbtBase instanceof NBTTagByte)
         {
-            return new ByteNode(((NBTTagByte)nbtBase).f());
+            return new ByteNode(((NBTTagByte)nbtBase).g());
         }
         if (nbtBase instanceof NBTTagShort)
         {
-            return new ShortNode(((NBTTagShort)nbtBase).e());
+            return new ShortNode(((NBTTagShort)nbtBase).f());
         }
         if (nbtBase instanceof NBTTagInt)
         {
-            return  new IntNode(((NBTTagInt)nbtBase).d());
+            return  new IntNode(((NBTTagInt)nbtBase).e());
         }
         if (nbtBase instanceof NBTTagLong)
         {
-            return new LongNode(((NBTTagLong)nbtBase).c());
+            return new LongNode(((NBTTagLong)nbtBase).d());
         }
         if (nbtBase instanceof NBTTagFloat)
         {
-            return new FloatNode(((NBTTagFloat)nbtBase).h());
+            return new FloatNode(((NBTTagFloat)nbtBase).i());
         }
         if (nbtBase instanceof NBTTagDouble)
         {
-            return new DoubleNode(((NBTTagDouble)nbtBase).g());
+            return new DoubleNode(((NBTTagDouble)nbtBase).h());
         }
         if (nbtBase instanceof NBTTagByteArray)
         {
@@ -111,14 +111,14 @@ public class NBTUtils
         }
         if (nbtBase instanceof NBTTagString)
         {
-            return StringNode.of(((NBTTagString)nbtBase).a_());
+            return StringNode.of(((NBTTagString)nbtBase).c_());
         }
         if (nbtBase instanceof NBTTagList)
         {
             ListNode list = ListNode.emptyList();
             for (int i = 0; i < ((NBTTagList)nbtBase).size(); i++)
             {
-                switch (((NBTTagList)nbtBase).f())
+                switch (((NBTTagList)nbtBase).g())
                 {
                 case 0:
                     //return new net.minecraft.server.NBTTagEnd();
@@ -132,17 +132,17 @@ public class NBTUtils
                     //return new net.minecraft.server.NBTTagLong();
                     throw new UnsupportedOperationException();
                 case 5:
-                    list.addNode(new FloatNode(((NBTTagList)nbtBase).e(i)));
+                    list.addNode(new FloatNode(((NBTTagList)nbtBase).f(i)));
                     break;
                 case 6:
-                    list.addNode(new DoubleNode(((NBTTagList)nbtBase).d(i)));
+                    list.addNode(new DoubleNode(((NBTTagList)nbtBase).e(i)));
                     break;
                 case 7:
                     // return new net.minecraft.server.NBTTagByteArray();
                     throw new UnsupportedOperationException();
                 case 11:
                     ListNode listNode = ListNode.emptyList();
-                    for (int anInt : ((NBTTagList)nbtBase).c(i))
+                    for (int anInt : ((NBTTagList)nbtBase).d(i))
                     {
                         listNode.addNode(new IntNode(anInt));
                     }
@@ -174,7 +174,7 @@ public class NBTUtils
         if (nbtBase instanceof NBTTagIntArray)
         {
             ListNode list = ListNode.emptyList();
-            for (int i : ((NBTTagIntArray)nbtBase).c())
+            for (int i : ((NBTTagIntArray)nbtBase).d())
             {
                 list.addNode(new IntNode(i));
             }

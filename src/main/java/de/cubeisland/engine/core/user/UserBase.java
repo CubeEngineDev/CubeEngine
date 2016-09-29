@@ -77,46 +77,24 @@ import java.util.Set;
 import java.util.UUID;
 import de.cubeisland.engine.core.CubeEngine;
 import de.cubeisland.engine.core.bukkit.BukkitUtils;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTTagDouble;
-import net.minecraft.server.v1_8_R3.NBTTagFloat;
-import net.minecraft.server.v1_8_R3.NBTTagList;
-import net.minecraft.server.v1_8_R3.WorldNBTStorage;
-import org.bukkit.Achievement;
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.EntityEffect;
-import org.bukkit.GameMode;
-import org.bukkit.Instrument;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Note;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.Sound;
-import org.bukkit.Statistic;
-import org.bukkit.WeatherType;
-import org.bukkit.World;
+import net.minecraft.server.v1_10_R1.EntityPlayer;
+import net.minecraft.server.v1_10_R1.NBTTagCompound;
+import net.minecraft.server.v1_10_R1.NBTTagDouble;
+import net.minecraft.server.v1_10_R1.NBTTagFloat;
+import net.minecraft.server.v1_10_R1.NBTTagList;
+import net.minecraft.server.v1_10_R1.WorldNBTStorage;
+import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Snowball;
+import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.InventoryView.Property;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -1359,42 +1337,6 @@ public class UserBase implements Player
         return null;
     }
 
-    @Deprecated
-    @Override
-    public Egg throwEgg()
-    {
-        final Player player = this.getOfflinePlayer().getPlayer();
-        if (player != null)
-        {
-            return player.throwEgg();
-        }
-        return null;
-    }
-
-    @Deprecated
-    @Override
-    public Snowball throwSnowball()
-    {
-        final Player player = this.getOfflinePlayer().getPlayer();
-        if (player != null)
-        {
-            return player.throwSnowball();
-        }
-        return null;
-    }
-
-    @Deprecated
-    @Override
-    public Arrow shootArrow()
-    {
-        final Player player = this.getOfflinePlayer().getPlayer();
-        if (player != null)
-        {
-            return player.shootArrow();
-        }
-        return null;
-    }
-
     @Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> type)
     {
@@ -1836,14 +1778,14 @@ public class UserBase implements Player
                     NBTTagList list = data.getList("Pos", NBT_ID_DOUBLE);
                     if (list != null)
                     {
-                        loc.setX(list.d(0));
-                        loc.setY(list.d(1));
-                        loc.setZ(list.d(2));
+                        loc.setX(list.e(0));
+                        loc.setY(list.e(1));
+                        loc.setZ(list.e(2));
                         list = data.getList("Rotation", NBT_ID_FLOAT);
                         if (list != null)
                         {
-                            loc.setPitch(list.e(0));
-                            loc.setYaw(list.e(1));
+                            loc.setPitch(list.f(0));
+                            loc.setYaw(list.f(1));
                         }
                         return loc;
                     }
@@ -2925,6 +2867,315 @@ public class UserBase implements Player
         if (player != null)
         {
             player.resetTitle();
+        }
+    }
+
+    @Override
+    public void stopSound(Sound sound) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.stopSound(sound);
+        }
+    }
+
+    @Override
+    public void stopSound(String s) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.stopSound(s);
+        }
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, location, i);
+        }
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, v, v1, v2, i);
+        }
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, T t) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, location, i, t);
+        }
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, T t) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, v, v1, v2, i, t);
+        }
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, location, i, v, v1, v2);
+        }
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, v, v1, v2, i, v3, v4, v5);
+        }
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, T t) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, location, i, v, v1, v2, t);
+        }
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, T t) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, v, v1, v2, i, v3, v4, v5, t);
+        }
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, double v3) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, location, i, v, v1, v2, v3);
+        }
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, double v6) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, v, v1, v2, i, v3, v4, v5, v6);
+        }
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, double v3, T t) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, location, i, v, v1, v2, v3, t);
+        }
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, double v6, T t) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.spawnParticle(particle, v, v1, v2, i, v3, v4, v5, v6, t);
+        }
+    }
+
+    @Override
+    public MainHand getMainHand() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.getMainHand();
+        }
+        return null;
+    }
+
+    @Override
+    public InventoryView openMerchant(Villager villager, boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.openMerchant(villager, b);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isHandRaised() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.isHandRaised();
+        }
+        return false;
+    }
+
+    @Override
+    public PotionEffect getPotionEffect(PotionEffectType potionEffectType) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.getPotionEffect(potionEffectType);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isGliding() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.isGliding();
+        }
+        return false;
+    }
+
+    @Override
+    public void setGliding(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setGliding(b);
+        }
+    }
+
+    @Override
+    public void setAI(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setAI(b);
+        }
+    }
+
+    @Override
+    public boolean hasAI() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.hasAI();
+        }
+        return false;
+    }
+
+    @Override
+    public void setCollidable(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setCollidable(b);
+        }
+    }
+
+    @Override
+    public boolean isCollidable() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.isCollidable();
+        }
+        return false;
+    }
+
+    @Override
+    public AttributeInstance getAttribute(Attribute attribute) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.getAttribute(attribute);
+        }
+        return null;
+    }
+
+    @Override
+    public void setGlowing(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setGlowing(b);
+        }
+    }
+
+    @Override
+    public boolean isGlowing() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.isGlowing();
+        }
+        return false;
+    }
+
+    @Override
+    public void setInvulnerable(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setInvulnerable(b);
+        }
+    }
+
+    @Override
+    public boolean isInvulnerable() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.isInvulnerable();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isSilent() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.isSilent();
+        }
+        return false;
+    }
+
+    @Override
+    public void setSilent(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setSilent(b);
+        }
+    }
+
+    @Override
+    public boolean hasGravity() {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            return player.hasGravity();
+        }
+        return false;
+    }
+
+    @Override
+    public void setGravity(boolean b) {
+        final Player player = this.getOfflinePlayer().getPlayer();
+        if (player != null)
+        {
+            player.setGravity(b);
         }
     }
 }
